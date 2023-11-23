@@ -1,9 +1,21 @@
+const appRoot = require("app-root-path");
+const dotenv = require("dotenv").config();
+
+var logger = appRoot.require('/config/winston');
+var i18n = require('i18n');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
+var morgan = require('morgan');
+i18n.configure(
+  {
+    cookie: 'lang',
+    autoreload: true,
+    register: global,
+    directory: appRoot.resolve('/locales')
+  }
+);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -13,14 +25,16 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+app.use(morgan('combined', {stream: logger.stream}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(i18.init);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
