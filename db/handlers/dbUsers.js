@@ -1,5 +1,6 @@
 const appRoot = require("app-root-path");
 const User = appRoot.require('db/models/User');
+var bcryptjs = require("bcryptjs");
 
 async function getUsersbyid(userid)
 {
@@ -12,11 +13,14 @@ async function getUsersbyid(userid)
 
 async function addUser(userinfo){
     let u = null;
+    userinfo.created_at=new Date();
+    userinfo.password = bcryptjs.hashSync(userinfo.password, 8);
     u=await User.query().insert(userinfo);
     return u;
 }
 
 async function updateUser(userInfo){
+    userInfo.updated_at = new Date();
     let u = await User.query().findById(userInfo.id).patch(userInfo);
     return u;
 }

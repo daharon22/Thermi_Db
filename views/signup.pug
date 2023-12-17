@@ -1,0 +1,20 @@
+extends layout 
+block content
+    div.col-md-5.mx-auto
+        form(action="/signup", method = "POST")
+            div.form-floating.mb-3
+                input.form-control(type='text' name='First_Name')
+                label(for="First_Name") !{__("firstname_label")}
+            div.form-floating.mb-3
+                input.form-control(type='text' name='Last_Name')
+                label(for="Last_Name") !{__("lastname_label")}
+            div.form-floating.mb-3
+                input.form-control(type='text' name='Email')
+                label(for="Email") !{__("email_label")}
+            div.form-floating.mb-3
+                input.form-control(type='password' name='Password')
+                label(for="Password") !{__("password_label")}
+            div.col-12
+                button.btn.btn-primary(type="submit" ) !{__("signup_label")}
+
+    

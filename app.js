@@ -18,6 +18,7 @@ i18n.configure(
 );
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var signupRouter = require('./routes/signupRouter');
 
 var app = express();
 
@@ -29,11 +30,12 @@ app.use(morgan('combined', {stream: logger.stream}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(i18.init);
+app.use(i18n.init);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/signup', signupRouter);
 
 
 // catch 404 and forward to error handler

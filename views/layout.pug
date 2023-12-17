@@ -9,4 +9,24 @@ html
     script(src='/javascripts/common.js')
     block pageheader
   body
+    h1.text-center=title
+    if errors && errors.length > 0
+      div.alert.alert-danger
+        - for( var i = 0; i<errors.length; ++i){
+          - let e = errors[i];
+            span !{e.msg}
+            if e.path
+              script. 
+                $(document).ready(
+                  function()
+                  {
+                    $('<div class="invalid-feedback">!{e.msg}</div>').insertAfter($("input[name='!{e.path}']"));
+                    $("input[name='!{e.path}']").addClass('is-invalid');
+                    if (i == 0)
+                      $("input[name='!{e.path}']").focus()
+                  }
+                )
+            if i!= (errors.length -1)
+              br
+        -}
     block content

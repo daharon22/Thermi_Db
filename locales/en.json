@@ -1,3 +1,11 @@
 {
-    
+	"firstname_label": "First Name",
+	"lastname_label": "Last Name",
+	"email_label": "Email",
+	"password_label": "Password",
+	"signup_label": "Sign Up",
+    "signupPageTitle": "Sign Up!",
+    "fieldIsRequired": "Field is required",
+	"signup_successful":"You've successfully signed up!",
+	"welcomeTitle": "Welcome!"
 }
