@@ -4,8 +4,13 @@
 	"email_label": "Email",
 	"password_label": "Password",
 	"signup_label": "Sign Up",
-    "signupPageTitle": "Sign Up!",
-    "fieldIsRequired": "Field is required",
-	"signup_successful":"You've successfully signed up!",
-	"welcomeTitle": "Welcome!"
+	"signupPageTitle": "Sign Up!",
+	"fieldIsRequired": "Field is required",
+	"signup_successful": "You've successfully signed up!",
+	"welcomeTitle": "Welcome!",
+	"loginPageTitle": "Login",
+	"login_label": "Login",
+	"homepageTitle": "home",
+	"login_failed": "Invalid Credentials",
+	"welcome_message": "Welcome %s"
 }

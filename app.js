@@ -1,6 +1,14 @@
 const appRoot = require("app-root-path");
 const dotenv = require("dotenv").config();
 
+var session = require('express-session')
+const KnexSessionStore = require('connect-session-knex')(session);
+const environment = process.env.NODE_ENV || 'development'
+const knexConfig = appRoot.require('db/knexfile');
+const Knex = require('knex')(knexConfig[environment]);
+const store = new KnexSessionStore({knex:Knex});
+
+
 var logger = appRoot.require('/config/winston');
 var i18n = require('i18n');
 var createError = require('http-errors');
@@ -19,13 +27,21 @@ i18n.configure(
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var signupRouter = require('./routes/signupRouter');
+var loginRouter = require('./routes/loginRouter');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
+app.use(session({
+  secret: process.env.SESSION_SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false,
+  maxAge: 1000*60*30 },
+  store: store
+}))
 app.use(morgan('combined', {stream: logger.stream}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,6 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/signup', signupRouter);
+app.use('/login', loginRouter);
 
 
 // catch 404 and forward to error handler

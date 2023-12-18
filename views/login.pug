@@ -1,0 +1,14 @@
+extends layout 
+block content
+    div.col-md-5.mx-auto
+        form(action="/login", method = "POST")
+            div.form-floating.mb-3
+                input.form-control(type='text' name='email')
+                label(for="email") !{__("email_label")}
+            div.form-floating.mb-3
+                input.form-control(type='password' name='password')
+                label(for="password") !{__("password_label")}
+            div.col-12
+                button.btn.btn-primary(type="submit" ) !{__("login_label")}
+
+    

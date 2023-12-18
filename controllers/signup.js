@@ -4,7 +4,7 @@ const appRoot = require("app-root-path");
 const dbUsers = appRoot.require('/db/handlers/dbUsers')
 
 
-async function showLoginForm(req, res, next)
+async function showSignupForm(req, res, next)
 {
     res.render("signup", {title: __("signupPageTitle")});
 }
@@ -42,4 +42,4 @@ async function processSignupRequest(req, res, next)
     }
 }
 
-module.exports = {showLoginForm, signupValidation, processSignupRequest, showWelcomePage}
+module.exports = {showSignupForm, signupValidation, processSignupRequest, showWelcomePage}

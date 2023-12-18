@@ -2,7 +2,7 @@ const appRoot = require("app-root-path");
 const User = appRoot.require('db/models/User');
 var bcryptjs = require("bcryptjs");
 
-async function getUsersbyid(userid)
+async function getUserById(userid)
 {
     let u = await User.query().where('userid', userid);
     if(u.length > 0){
@@ -14,7 +14,7 @@ async function getUsersbyid(userid)
 async function addUser(userinfo){
     let u = null;
     userinfo.created_at=new Date();
-    userinfo.password = bcryptjs.hashSync(userinfo.password, 8);
+    userinfo.password = bcryptjs.hashSync(userinfo.password, process.env.ENCRYPTION_SALT | 0);
     u=await User.query().insert(userinfo);
     return u;
 }
@@ -29,4 +29,4 @@ async function deleteUser(userid){
     let u = await User.query().delete().whereIn('userid',[userid]);
 }
 
-module.exports = {getUsersbyid, addUser, updateUser,deleteUser}
+module.exports = {getUserById, addUser, updateUser,deleteUser}
