@@ -12,5 +12,7 @@
 	"login_label": "Login",
 	"homepageTitle": "home",
 	"login_failed": "Invalid Credentials",
-	"welcome_message": "Welcome %s"
+	"welcome_message": "Welcome %s",
+	"temperature_display": "Temperature: %s",
+	"temperature_page_title": "Temperatures"
 }

@@ -35,14 +35,20 @@ async function processLoginRequest(req, res, next)
     let errors = validationResult(req);
     if (errors.isEmpty())
     {
+
+
         
         let u = await dbUsers.getUserById(req.body.email);
         if(u){
-            let samePass = bcryptjs.compare(u.password, req.body.password)
+
+            let samePass = await bcryptjs.compare(req.body.password, u.password)
             if(samePass){
                 req.session.user = u;
                 u.last_login = new Date();
                 await dbUsers.updateUser(u);
+                if(req.API){
+                    return res.status(200).json({works:true});
+                }
                 return res.redirect("/home");
             }
         }
@@ -52,6 +58,11 @@ async function processLoginRequest(req, res, next)
 
 
     errors= {errors:[{msg:__("login_failed")}]};
+    if(req.API){
+        return res.status(200).json({works:false});
+    }
+
+    
     res.render("login", {title: __("loginPageTitle"), errors:errors.errors});
 }
 

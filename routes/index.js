@@ -3,6 +3,8 @@ var router = express.Router();
 const appRoot = require("app-root-path");
 const signupController = appRoot.require("/controllers/signup");
 const loginController = appRoot.require("/controllers/login");
+const deviceController = appRoot.require("/controllers/devices");
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,5 +16,7 @@ router.get("/logout", loginController.logout);
 router.get("/welcome", signupController.showWelcomePage);
 
 router.get("/home", loginController.showHomePage);
+
+router.get("/showtemp", deviceController.showTempPage);
 
 module.exports = router;

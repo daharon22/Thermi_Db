@@ -1,0 +1,19 @@
+var express = require('express');
+const appRoot = require("app-root-path");
+var router = express.Router();
+const devices = appRoot.require("/controllers/devices");
+const login = appRoot.require("/controllers/login");
+
+//ADD for /newdevice
+//router.get('/newdevicevent', signup.showSignupForm);
+router.post('/newdeviceevent', apiRequest, devices.processDeviceEvent);
+router.post('/gettemp', apiRequest, devices.getLastTemp);
+router.post('/login', apiRequest, login.processLoginRequest)
+
+async function apiRequest(req,res,next)
+{
+    req.API = true;
+    next();
+}
+
+module.exports = router;
