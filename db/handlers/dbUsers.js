@@ -25,6 +25,7 @@ async function updateUser(userInfo){
     return u;
 }
 
+
 async function deleteUser(userid){
     let u = await User.query().delete().whereIn('userid',[userid]);
 }

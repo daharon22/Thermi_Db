@@ -14,5 +14,6 @@
 	"login_failed": "Invalid Credentials",
 	"welcome_message": "Welcome %s",
 	"temperature_display": "Temperature: %s",
-	"temperature_page_title": "Temperatures"
+	"temperature_page_title": "Temperatures",
+	"signup_failed": "Email already in use"
 }

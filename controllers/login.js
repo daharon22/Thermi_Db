@@ -3,6 +3,7 @@ const { body, validationResult } = require('express-validator');
 const appRoot = require("app-root-path");
 const dbUsers = appRoot.require('/db/handlers/dbUsers')
 var bcryptjs = require("bcryptjs");
+const { v4: uuidv4 } = require('uuid');
 
 
 async function showLoginForm(req, res, next)
@@ -37,7 +38,7 @@ async function processLoginRequest(req, res, next)
     {
 
 
-        
+
         let u = await dbUsers.getUserById(req.body.email);
         if(u){
 
@@ -47,7 +48,11 @@ async function processLoginRequest(req, res, next)
                 u.last_login = new Date();
                 await dbUsers.updateUser(u);
                 if(req.API){
-                    return res.status(200).json({works:true});
+                    let tok = uuidv4();
+                    u.token=tok;
+                    await dbUsers.updateUser(u);
+
+                    return res.status(200).json({works:true,token:tok});
                 }
                 return res.redirect("/home");
             }
