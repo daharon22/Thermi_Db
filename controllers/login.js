@@ -10,6 +10,17 @@ async function showLoginForm(req, res, next)
 {
     res.render("login", {title: __("loginPageTitle")});
 }
+async function addFcmToken(req,res,next){
+    let u = await dbUsers.getUserByToken(req.body.tok);
+    if(u){
+        u.fcm_token = req.body.fcm_token;
+        let b = await dbUsers.updateUser(u);
+        return res.status(200);
+
+    }
+    
+}
+
 
 async function showHomePage(req, res, next)
 {
@@ -46,12 +57,15 @@ async function processLoginRequest(req, res, next)
             if(samePass){
                 req.session.user = u;
                 u.last_login = new Date();
+                u.fcm_token = req.body.fcm_token;
                 await dbUsers.updateUser(u);
                 if(req.API){
                     let tok = uuidv4();
                     u.token=tok;
                     await dbUsers.updateUser(u);
+                    
 
+                    
                     return res.status(200).json({works:true,token:tok});
                 }
                 return res.redirect("/home");
@@ -71,4 +85,4 @@ async function processLoginRequest(req, res, next)
     res.render("login", {title: __("loginPageTitle"), errors:errors.errors});
 }
 
-module.exports = {logout, showLoginForm, processLoginRequest, loginValidation, showHomePage}
+module.exports = {addFcmToken, logout, showLoginForm, processLoginRequest, loginValidation, showHomePage}

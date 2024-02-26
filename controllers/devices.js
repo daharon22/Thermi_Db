@@ -8,10 +8,13 @@ async function getLastTemp(req, res, next){
     let d = await dbDevices.getDeviceByToken(req.body.token);
     if(d)
     {
-        let t = await dbDevices.getLastTempForDevice(d.id).temperature_t1;
-        return res.json({"temperature_t1": t});
+        let lastTemp = await dbDevices.getLastTempForDevice(d.id);
+        let t1 = lastTemp.temperature_t1;
+        let t2 = lastTemp.temperature_t2;
+        return res.json({"works":true, "temperature_t1":t1, "temperature_t2":t2});
     }
-    return res.json;
+    
+    return res.status(200).json({works:false});
 }
 
 async function showTempPage(req, res, next)

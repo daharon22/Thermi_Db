@@ -5,6 +5,7 @@ const dbUsers = appRoot.require('/db/handlers/dbUsers')
 const { v4: uuidv4 } = require('uuid');
 
 
+
 async function showSignupForm(req, res, next)
 {
     res.render("signup", {title: __("signupPageTitle")});

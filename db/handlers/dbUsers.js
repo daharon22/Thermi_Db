@@ -11,6 +11,15 @@ async function getUserById(userid)
     return null;
 }
 
+async function getUserByToken(token)
+{
+    let u = await User.query().where('token', token);
+    if(u.length > 0){
+        return u[0];
+    }
+    return null;
+}
+
 async function addUser(userinfo){
     let u = null;
     userinfo.created_at=new Date();
@@ -30,4 +39,4 @@ async function deleteUser(userid){
     let u = await User.query().delete().whereIn('userid',[userid]);
 }
 
-module.exports = {getUserById, addUser, updateUser,deleteUser}
+module.exports = {getUserByToken, getUserById, addUser, updateUser,deleteUser}
