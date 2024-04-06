@@ -128,3 +128,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+firebase/thermimobile-firebase-adminsdk-7hpss-b389bae67f.json
+firebase/fcm-credentials.json

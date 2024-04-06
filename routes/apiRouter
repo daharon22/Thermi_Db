@@ -9,9 +9,11 @@ const signup = appRoot.require("/controllers/signup");
 //router.get('/newdevicevent', signup.showSignupForm);
 router.post('/newdeviceevent', apiRequest, devices.processDeviceEvent);
 router.post('/gettemp', apiRequest, devices.getLastTemp);
-router.post('/login', apiRequest, login.processLoginRequest, login.addFcmToken)
-router.post('/signup', apiRequest, signup.processSignupRequest)
-router.post('/addfcmtoken', apiRequest, login.addFcmToken)
+router.post('/login', apiRequest, login.processLoginRequest, login.addFcmToken);
+router.post('/signup', apiRequest, signup.processSignupRequest);
+router.post('/addfcmtoken', apiRequest, login.addFcmToken);
+router.post('/getMaxTemp', apiRequest, devices.getMaxTemp);
+router.post('/setMaxTemp', apiRequest, devices.setMaxTemp);
 
 async function apiRequest(req,res,next)
 {

@@ -10,6 +10,14 @@ async function getUserById(userid)
     }
     return null;
 }
+async function getUserByid(id)
+{
+    let u = await User.query().where('id', id);
+    if(u.length > 0){
+        return u[0];
+    }
+    return null;
+}
 
 async function getUserByToken(token)
 {
@@ -39,4 +47,4 @@ async function deleteUser(userid){
     let u = await User.query().delete().whereIn('userid',[userid]);
 }
 
-module.exports = {getUserByToken, getUserById, addUser, updateUser,deleteUser}
+module.exports = {getUserByToken, getUserById, addUser, updateUser,deleteUser, getUserByid}
