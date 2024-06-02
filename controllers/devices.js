@@ -59,7 +59,15 @@ async function processDeviceEvent(req, res, next){
 
         let user = await dbUsers.getUserByid(d.owner_id);
         let tok = user.fcm_token;
-        firebase.sendNotif(req.body.event_type, tok);
+        let update = "update";
+        if(req.body.event_type===update){
+
+        }
+        else{
+            firebase.sendNotif(req.body.event_type, tok);
+
+        }
+        
 
         return res.status(200).json({});
         
