@@ -14,6 +14,7 @@ router.post('/signup', apiRequest, signup.processSignupRequest);
 router.post('/addfcmtoken', apiRequest, login.addFcmToken);
 router.post('/getMaxTemp', apiRequest, devices.getMaxTemp);
 router.post('/setMaxTemp', apiRequest, devices.setMaxTemp);
+router.post('/newdevice', apiRequest, devices.registerNewDevice)
 
 async function apiRequest(req,res,next)
 {
