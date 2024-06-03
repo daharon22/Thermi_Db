@@ -93,8 +93,8 @@ async function registerNewDevice(req, res, next)
         last_seen: new Date(),
         firmware_version: req.body.firmware_version, 
         model: req.body.model,
-        token: uuidv4(),
-        //owner_id: ???
+        token: req.body.tok,
+        owner_id: req.body.owner_id
     })
     /*table.string('name').notNullable();
       table.string('serial_number');
