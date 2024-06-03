@@ -106,6 +106,8 @@ async function registerNewDevice(req, res, next)
       table.integer('owner_id').references("users.id");
 
     */
+   let u = await dbDevices.addDevice(d);
+   return u;
 
 
 }
