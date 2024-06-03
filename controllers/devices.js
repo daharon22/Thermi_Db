@@ -85,8 +85,7 @@ let loginValidation =
 
 async function registerNewDevice(req, res, next)
 {
-    let d = await dbDevices.addDevice({
-        //can i do below?
+    let d = ({
         name: "Thermi " + req.body.serial_number, 
         serial_number: req.body.serial_number, 
         mac_address: req.body.mac_address,
